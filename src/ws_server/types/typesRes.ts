@@ -4,7 +4,7 @@ export interface IResponse {
     | IRegRes
     | IUpdateWin[]
     | ICreateGame
-    | IUpdateRoom
+    | IUpdateRoom[]
     | IStartGame
     | IAttackRes
     | ITurn

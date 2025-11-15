@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start:dev": "nodemon --exec \"tsx src/index.ts\" --watch src -e ts,js,json",
+    "start:dev": "nodemon",
     "start:prod": "tsc && node dist/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
