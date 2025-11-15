@@ -1,6 +1,7 @@
 import { createGame } from './components/create_game';
 import { createRoom } from './components/create_room';
 import { reg } from './components/reg';
+import { startGame } from './components/start_game';
 import { IRequest } from './types/typesReq';
 
 export const app = async (req: IRequest) => {
@@ -14,6 +15,9 @@ export const app = async (req: IRequest) => {
       break;
     case 'add_user_to_room':
       response = createGame();
+      break;
+    case 'add_ships':
+      response = startGame(JSON.parse(req.data.toString()));
       break;
     default:
       console.log('An unrecognized request was received');
