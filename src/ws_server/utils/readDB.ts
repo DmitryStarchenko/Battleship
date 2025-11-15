@@ -1,8 +1,8 @@
 import { join } from 'node:path';
-import { DBRegUsers } from '../types/DB';
+import { DBOnlineUsers, DBRooms } from '../types/DB';
 import { readFile } from 'node:fs/promises';
 
-export const readDB = async (fileName: string): Promise<DBRegUsers[]> => {
+export const readDB = async (fileName: string): Promise<DBOnlineUsers[] | DBRooms[]> => {
   const DB_PATH = join(process.cwd(), `src/DataBase/${fileName}.json`);
   try {
     const data = await readFile(DB_PATH, 'utf-8');

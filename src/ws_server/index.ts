@@ -1,14 +1,11 @@
 import { WebSocketServer, WebSocket } from 'ws';
 import { app } from './app';
 import { userLogout } from './utils/userLogout';
+import { ExtendedWebSocket } from './types/websocket';
 
 export const WEBSOCKET_PORT = 3000;
 
-const wss = new WebSocketServer({ port: WEBSOCKET_PORT });
-
-interface ExtendedWebSocket extends WebSocket {
-  userIndex?: number;
-}
+export const wss = new WebSocketServer({ port: WEBSOCKET_PORT });
 
 wss.on('connection', function connection(ws: WebSocket) {
   console.log(`New WebSocket connection established`);
@@ -16,16 +13,15 @@ wss.on('connection', function connection(ws: WebSocket) {
   ws.on('message', async message => {
     console.log(JSON.parse(message.toString()));
     const req = JSON.parse(message.toString());
-    const res = await app(req);
 
-    if (req.type === 'reg' && res?.type === 'reg' && typeof res.data === 'string') {
-      const regData = JSON.parse(res.data);
-      if (!regData.error && regData.index) {
-        (ws as ExtendedWebSocket).userIndex = regData.index;
+    if (req.type === 'reg') {
+      await app(req, ws as ExtendedWebSocket, wss);
+    } else {
+      const res = await app(req, ws as ExtendedWebSocket, wss);
+      if (res) {
+        ws.send(JSON.stringify(res));
       }
     }
-
-    ws.send(JSON.stringify(res));
   });
 
   ws.on('close', async function close() {

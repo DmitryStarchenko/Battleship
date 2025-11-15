@@ -3,11 +3,11 @@ import { IResponse } from '../types/typesRes';
 import { DBRegUsers } from '../types/DB';
 import { writeDB } from '../utils/writeDB';
 import { readDB } from '../utils/readDB';
-
-const FILE_NAME = 'Online_users';
+import { DB_FILES } from '../constants/database';
+import { generateUniqueId } from '../utils/generateId';
 
 export const reg = async (data: IRegReq): Promise<IResponse> => {
-  const onlineUsers = await readDB(FILE_NAME);
+  const onlineUsers = (await readDB(DB_FILES.ONLINE_USERS)) as DBRegUsers[];
   const existingUser = onlineUsers.find(({ name }) => name === data.name);
 
   if (existingUser) {
@@ -23,7 +23,9 @@ export const reg = async (data: IRegReq): Promise<IResponse> => {
     };
   }
 
-  const index = generateUniqueIndex(onlineUsers);
+  const existingIndexes = new Set(onlineUsers.map(({ index }) => index));
+  const index = generateUniqueId(existingIndexes);
+
   const responsePayload = {
     name: data.name,
     index,
@@ -37,22 +39,11 @@ export const reg = async (data: IRegReq): Promise<IResponse> => {
     index: responsePayload.index,
   });
 
-  await writeDB(onlineUsers, FILE_NAME);
+  await writeDB(onlineUsers, DB_FILES.ONLINE_USERS);
 
   return {
     type: 'reg',
     data: JSON.stringify(responsePayload),
     id: 0,
   };
-};
-
-const generateUniqueIndex = (regUsers: DBRegUsers[]): number => {
-  const existingIndexes = new Set(regUsers.map(({ index }) => index));
-  let index = Math.floor(Math.random() * 1_000_000);
-
-  while (existingIndexes.has(index)) {
-    index = Math.floor(Math.random() * 1_000_000);
-  }
-
-  return index;
 };

@@ -1,10 +1,12 @@
-import { WebSocket } from 'ws';
+import { WebSocket, WebSocketServer } from 'ws';
 import { IResponse } from '../types/typesRes';
 
-export const broadcast = (message: IResponse, sender: WebSocket, clients: WebSocket[]): void => {
-  for (const client of clients) {
-    if (client !== sender && client.readyState === WebSocket.OPEN) {
-      client.send(JSON.stringify(message));
+export const broadcast = (message: IResponse, wss: WebSocketServer): void => {
+  const messageStr = JSON.stringify(message);
+  console.log(messageStr);
+  wss.clients.forEach(client => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(messageStr);
     }
-  }
+  });
 };

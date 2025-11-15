@@ -1,10 +1,10 @@
 import { writeFile } from 'node:fs/promises';
-import { DBRegUsers } from '../types/DB';
+import { DBRegUsers, DBRooms } from '../types/DB';
 import { join } from 'node:path';
 import { IUpdateRoom } from '../types/typesRes';
 
 export const writeDB = async (
-  dataDB: DBRegUsers[] | IUpdateRoom[],
+  dataDB: DBRegUsers[] | DBRooms[] | IUpdateRoom[],
   fileName: string
 ): Promise<void> => {
   const DB_PATH = join(process.cwd(), `src/DataBase/${fileName}.json`);
