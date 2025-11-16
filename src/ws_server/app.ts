@@ -31,6 +31,8 @@ const requiresAuth = (
 export const app = async (req: IRequest, ws: ExtendedWebSocket, wss: WebSocketServer) => {
   const data = req.data.toString();
 
+  console.log(`📨 Request: ${req.type}`);
+
   switch (req.type) {
     case 'reg':
       await handleReg(data, ws);
