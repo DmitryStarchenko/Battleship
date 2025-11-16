@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "Template for the WebSocket remote control task",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "nodemon",
-    "start:prod": "tsc && node dist/index.js",
+    "start": "tsc && node dist/index.js",
+    "start:dev": "nodemon",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format-fix": "prettier --write .",
