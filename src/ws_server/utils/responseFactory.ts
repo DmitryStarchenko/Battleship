@@ -1,5 +1,5 @@
-import { IResponse } from '../types/typesRes';
-import { IShips } from '../types/typesReq';
+import { IResponse } from '../types/response';
+import { IShips } from '../types/request';
 import { RESPONSE_CONFIG } from '../constants/response';
 
 export const createResponse = <T>(type: string, data: T): IResponse => ({

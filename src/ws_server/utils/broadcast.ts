@@ -1,5 +1,5 @@
 import { WebSocket, WebSocketServer } from 'ws';
-import { IResponse } from '../types/typesRes';
+import { IResponse } from '../types/response';
 
 export const broadcast = (message: IResponse, wss: WebSocketServer): void => {
   const messageStr = JSON.stringify(message);

@@ -40,3 +40,15 @@ export interface IRandomAttack {
   gameId: number | string;
   indexPlayer: number | string;
 }
+
+export interface AttackData {
+  gameId: string;
+  indexPlayer: string;
+  x: number;
+  y: number;
+}
+
+export interface RandomAttackData {
+  gameId: string;
+  indexPlayer: string;
+}

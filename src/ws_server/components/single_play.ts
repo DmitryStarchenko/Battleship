@@ -1,4 +1,4 @@
-import { IResponse } from '../types/typesRes';
+import { IResponse } from '../types/response';
 import { createGameSession, addShipsToGame } from '../utils/gameStorage';
 import { generateRandomId } from '../utils/generateId';
 import { generateBotShips } from '../utils/botShips';

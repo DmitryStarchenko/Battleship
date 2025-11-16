@@ -1,7 +1,7 @@
 import { writeFile } from 'node:fs/promises';
 import { DBRegUsers, DBRooms, DBWinner } from '../types/DB';
 import { join } from 'node:path';
-import { IUpdateRoom } from '../types/typesRes';
+import { IUpdateRoom } from '../types/response';
 import { SERVER_CONFIG } from '../constants/server';
 
 export const writeDB = async (

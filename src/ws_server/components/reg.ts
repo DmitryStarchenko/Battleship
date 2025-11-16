@@ -1,5 +1,5 @@
-import { IRegReq } from '../types/typesReq';
-import { IResponse } from '../types/typesRes';
+import { IRegReq } from '../types/request';
+import { IResponse } from '../types/response';
 import { DBRegUsers } from '../types/DB';
 import { writeDB } from '../utils/writeDB';
 import { readDB } from '../utils/readDB';

@@ -1,5 +1,5 @@
 import { WebSocket, WebSocketServer } from 'ws';
-import { IResponse } from '../types/typesRes';
+import { IResponse } from '../types/response';
 import { ExtendedWebSocket } from '../types/websocket';
 
 export const sendToUser = (userIndex: number, message: IResponse, wss: WebSocketServer): void => {

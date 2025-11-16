@@ -1,4 +1,4 @@
-import { IShips } from '../types/typesReq';
+import { IShips } from '../types/request';
 import { SHIP_CONFIGS, GAME_CONFIG, SHIP_PLACEMENT } from '../constants/game';
 import { BOT_CONFIG } from '../constants/bot';
 

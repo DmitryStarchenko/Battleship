@@ -1,8 +1,8 @@
 import { readDB } from '../utils/readDB';
 import { writeDB } from '../utils/writeDB';
 import { DBRooms, DBOnlineUsers } from '../types/DB';
-import { IResponse } from '../types/typesRes';
-import { IAddUser } from '../types/typesReq';
+import { IResponse } from '../types/response';
+import { IAddUser } from '../types/request';
 import { DB_FILES } from '../constants/database';
 import { RESPONSE_CONFIG } from '../constants/response';
 import { GAME_CONFIG } from '../constants/game';

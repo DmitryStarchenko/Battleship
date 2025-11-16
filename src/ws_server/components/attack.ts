@@ -1,5 +1,5 @@
-import { IAttack } from '../types/typesReq';
-import { IResponse } from '../types/typesRes';
+import { IAttack } from '../types/request';
+import { IResponse } from '../types/response';
 import {
   getGameSession,
   getOpponentShips,

@@ -1,4 +1,4 @@
-import { IResponse } from '../types/typesRes';
+import { IResponse } from '../types/response';
 import { getGameSession } from '../utils/gameStorage';
 import { sendToUser } from '../utils/sendToUser';
 import { broadcast } from '../utils/broadcast';

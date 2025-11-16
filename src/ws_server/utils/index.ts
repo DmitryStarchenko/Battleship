@@ -8,4 +8,5 @@ export * from './readDB';
 export * from './responseFactory';
 export * from './sendToUser';
 export * from './userLogout';
+export * from './validateTurn';
 export * from './writeDB';

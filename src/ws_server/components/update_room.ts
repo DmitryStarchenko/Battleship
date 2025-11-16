@@ -1,6 +1,6 @@
 import { readDB } from '../utils/readDB';
 import { DBRooms } from '../types/DB';
-import { IUpdateRoom, IResponse } from '../types/typesRes';
+import { IUpdateRoom, IResponse } from '../types/response';
 import { DB_FILES } from '../constants/database';
 import { GAME_CONFIG } from '../constants/game';
 import { RESPONSE_CONFIG } from '../constants/response';

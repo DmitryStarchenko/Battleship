@@ -1,4 +1,4 @@
-import { IShips } from '../types/typesReq';
+import { IShips } from '../types/request';
 import { GameSession } from '../types/game';
 import { generateRandomId } from './generateId';
 

@@ -1,4 +1,4 @@
-import { IAddShips } from '../types/typesReq';
+import { IAddShips } from '../types/request';
 import { addShipsToGame, bothPlayersReady, getGameSession } from '../utils/gameStorage';
 import { sendToUser } from '../utils/sendToUser';
 import { createStartGameResponse, createTurnResponse } from '../utils/responseFactory';

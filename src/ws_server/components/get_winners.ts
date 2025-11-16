@@ -1,4 +1,4 @@
-import { IResponse } from '../types/typesRes';
+import { IResponse } from '../types/response';
 import { readDB } from '../utils/readDB';
 import { DBWinner } from '../types/DB';
 import { DB_FILES } from '../constants/database';

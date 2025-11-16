@@ -4,5 +4,6 @@ export * from './create_room';
 export * from './get_winners';
 export * from './randomAttack';
 export * from './reg';
+export * from './single_play';
 export * from './update_room';
 export * from './update_winners';

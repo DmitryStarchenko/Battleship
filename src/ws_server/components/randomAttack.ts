@@ -1,5 +1,5 @@
-import { IRandomAttack } from '../types/typesReq';
-import { IResponse } from '../types/typesRes';
+import { IRandomAttack } from '../types/request';
+import { IResponse } from '../types/response';
 import { getGameSession, getOpponentPlayer, getPlayerHits } from '../utils/gameStorage';
 import { getAvailableCells } from '../utils/battleLogic';
 import { attack } from './attack';

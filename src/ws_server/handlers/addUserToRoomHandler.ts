@@ -5,7 +5,6 @@ import { broadcast } from '../utils/broadcast';
 import { sendToUser } from '../utils/sendToUser';
 import { createGameResponse } from '../utils/responseFactory';
 import { WebSocketServer } from 'ws';
-
 import { GAME_CONFIG } from '../constants/game';
 
 export const handleAddUserToRoom = async (

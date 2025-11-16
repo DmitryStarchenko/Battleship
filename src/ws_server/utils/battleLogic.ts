@@ -1,4 +1,4 @@
-import { IShips } from '../types/typesReq';
+import { IShips } from '../types/request';
 import { GAME_CONFIG } from '../constants/game';
 
 export const getShipPositions = (ship: IShips): Array<{ x: number; y: number }> => {

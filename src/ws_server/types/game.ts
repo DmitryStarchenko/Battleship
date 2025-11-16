@@ -1,4 +1,4 @@
-import { IShips } from './typesReq';
+import { IShips } from './request';
 
 export interface GameSession {
   idGame: number;
