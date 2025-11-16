@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start:dev": "nodemon",
+    "start": "nodemon",
     "start:prod": "tsc && node dist/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",

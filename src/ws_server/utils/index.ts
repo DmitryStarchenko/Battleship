@@ -1,4 +1,6 @@
 export * from './battleLogic';
+export * from './botMove';
+export * from './botShips';
 export * from './broadcast';
 export * from './gameStorage';
 export * from './generateId';

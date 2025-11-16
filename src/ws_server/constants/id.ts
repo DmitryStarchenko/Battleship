@@ -1,0 +1,5 @@
+export const ID_CONFIG = {
+  MAX_USER_ID: 1_000_000,
+  MAX_ROOM_ID: 9999,
+  MAX_RANDOM_ID: 999999,
+};

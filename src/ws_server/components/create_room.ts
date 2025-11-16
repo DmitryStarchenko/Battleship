@@ -3,6 +3,7 @@ import { writeDB } from '../utils/writeDB';
 import { DBRooms, DBOnlineUsers } from '../types/DB';
 import { DB_FILES } from '../constants/database';
 import { generateRandomId } from '../utils/generateId';
+import { ID_CONFIG } from '../constants/id';
 
 export const createRoom = async (userIndex: number): Promise<void> => {
   const rooms = (await readDB(DB_FILES.ROOMS)) as DBRooms[];
@@ -11,7 +12,7 @@ export const createRoom = async (userIndex: number): Promise<void> => {
   const user = users.find(data => data.index === userIndex);
 
   const newRoom: DBRooms = {
-    roomId: generateRandomId(9999),
+    roomId: generateRandomId(ID_CONFIG.MAX_ROOM_ID),
     roomUsers: [
       {
         name: user ? user.name : '',

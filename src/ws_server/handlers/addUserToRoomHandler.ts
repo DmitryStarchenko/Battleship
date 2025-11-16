@@ -6,6 +6,8 @@ import { sendToUser } from '../utils/sendToUser';
 import { createGameResponse } from '../utils/responseFactory';
 import { WebSocketServer } from 'ws';
 
+import { GAME_CONFIG } from '../constants/game';
+
 export const handleAddUserToRoom = async (
   data: string,
   userIndex: number,
@@ -16,7 +18,11 @@ export const handleAddUserToRoom = async (
   if (response && response.data) {
     const roomData = JSON.parse(response.data as string);
 
-    if (roomData && roomData.roomUsers && roomData.roomUsers.length === 2) {
+    if (
+      roomData &&
+      roomData.roomUsers &&
+      roomData.roomUsers.length === GAME_CONFIG.PLAYERS_PER_GAME
+    ) {
       const playerIndexes = roomData.roomUsers.map((user: { index: number }) => user.index);
       const gameSession = createGameSession(roomData.roomId, playerIndexes);
 

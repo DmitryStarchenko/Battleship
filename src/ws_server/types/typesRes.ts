@@ -10,7 +10,7 @@ export interface IResponse {
     | ITurn
     | IFinish
     | string;
-  id: 0;
+  id: number;
 }
 
 export interface IRegRes {

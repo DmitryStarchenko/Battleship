@@ -2,25 +2,16 @@ import { WebSocketServer, WebSocket } from 'ws';
 import { app } from './app';
 import { userLogout } from './utils/userLogout';
 import { ExtendedWebSocket } from './types/websocket';
+import { SERVER_CONFIG } from './constants/server';
 
-export const WEBSOCKET_PORT = 3000;
-
-export const wss = new WebSocketServer({ port: WEBSOCKET_PORT });
+export const wss = new WebSocketServer({ port: SERVER_CONFIG.WEBSOCKET_PORT });
 
 wss.on('connection', function connection(ws: WebSocket) {
   console.log(`New WebSocket connection established`);
 
   ws.on('message', async message => {
     const req = JSON.parse(message.toString());
-
-    if (req.type === 'reg') {
-      await app(req, ws as ExtendedWebSocket, wss);
-    } else {
-      const res = await app(req, ws as ExtendedWebSocket, wss);
-      if (res) {
-        ws.send(JSON.stringify(res));
-      }
-    }
+    await app(req, ws, wss);
   });
 
   ws.on('close', async function close() {

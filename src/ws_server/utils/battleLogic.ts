@@ -1,4 +1,5 @@
 import { IShips } from '../types/typesReq';
+import { GAME_CONFIG } from '../constants/game';
 
 export const getShipPositions = (ship: IShips): Array<{ x: number; y: number }> => {
   const positions: Array<{ x: number; y: number }> = [];
@@ -27,7 +28,12 @@ export const getSurroundingCells = (
         const newX = position.x + dx;
         const newY = position.y + dy;
 
-        if (newX >= 0 && newX <= 9 && newY >= 0 && newY <= 9) {
+        if (
+          newX >= GAME_CONFIG.MIN_COORDINATE &&
+          newX <= GAME_CONFIG.MAX_COORDINATE &&
+          newY >= GAME_CONFIG.MIN_COORDINATE &&
+          newY <= GAME_CONFIG.MAX_COORDINATE
+        ) {
           const key = `${newX},${newY}`;
           const isShipCell = shipPositions.some(
             position => position.x === newX && position.y === newY
@@ -88,8 +94,8 @@ export const checkAllShipsDestroyed = (ships: IShips[], hits: Set<string>): bool
 export const getAvailableCells = (hits: Set<string>): Array<{ x: number; y: number }> => {
   const availableCells: Array<{ x: number; y: number }> = [];
 
-  for (let x = 0; x <= 9; x++) {
-    for (let y = 0; y <= 9; y++) {
+  for (let x = GAME_CONFIG.MIN_COORDINATE; x <= GAME_CONFIG.MAX_COORDINATE; x++) {
+    for (let y = GAME_CONFIG.MIN_COORDINATE; y <= GAME_CONFIG.MAX_COORDINATE; y++) {
       const key = `${x},${y}`;
       if (!hits.has(key)) {
         availableCells.push({ x, y });

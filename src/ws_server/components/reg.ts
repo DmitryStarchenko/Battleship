@@ -5,6 +5,7 @@ import { writeDB } from '../utils/writeDB';
 import { readDB } from '../utils/readDB';
 import { DB_FILES } from '../constants/database';
 import { generateUniqueId } from '../utils/generateId';
+import { RESPONSE_CONFIG } from '../constants/response';
 
 export const reg = async (data: IRegReq): Promise<IResponse> => {
   const onlineUsers = (await readDB(DB_FILES.ONLINE_USERS)) as DBRegUsers[];
@@ -19,7 +20,7 @@ export const reg = async (data: IRegReq): Promise<IResponse> => {
         error: true,
         errorText: 'This user already exists',
       }),
-      id: 0,
+      id: RESPONSE_CONFIG.DEFAULT_ID,
     };
   }
 
@@ -44,6 +45,6 @@ export const reg = async (data: IRegReq): Promise<IResponse> => {
   return {
     type: 'reg',
     data: JSON.stringify(responsePayload),
-    id: 0,
+    id: RESPONSE_CONFIG.DEFAULT_ID,
   };
 };

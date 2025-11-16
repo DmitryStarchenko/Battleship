@@ -9,7 +9,9 @@ import {
   handleAddUserToRoom,
   handleAddShips,
   handleAttackResult,
+  handleSinglePlay,
 } from './handlers';
+import { getGameSession, getPlayerByIdPlayer } from './utils/gameStorage';
 
 export const app = async (req: IRequest, ws: ExtendedWebSocket, wss: WebSocketServer) => {
   switch (req.type) {
@@ -31,23 +33,47 @@ export const app = async (req: IRequest, ws: ExtendedWebSocket, wss: WebSocketSe
 
     case 'add_ships':
       if (ws.userIndex !== undefined) {
-        handleAddShips(req.data.toString(), ws.userIndex, wss);
+        await handleAddShips(req.data.toString(), ws.userIndex, wss);
       }
       break;
 
     case 'attack':
       if (ws.userIndex !== undefined) {
         const attackData = JSON.parse(req.data.toString());
-        const result = attack(attackData);
-        await handleAttackResult(result, Number(attackData.gameId), wss);
+        const gameId = Number(attackData.gameId);
+        const attackerIdPlayer = Number(attackData.indexPlayer);
+
+        const gameSession = getGameSession(gameId);
+        if (gameSession) {
+          const attacker = getPlayerByIdPlayer(gameId, attackerIdPlayer);
+          if (attacker && attacker.index === gameSession.currentPlayerIndex) {
+            const result = attack(attackData);
+            await handleAttackResult(result, gameId, wss);
+          }
+        }
       }
       break;
 
     case 'randomAttack':
       if (ws.userIndex !== undefined) {
         const randomAttackData = JSON.parse(req.data.toString());
-        const result = randomAttack(randomAttackData);
-        await handleAttackResult(result, Number(randomAttackData.gameId), wss);
+        const gameId = Number(randomAttackData.gameId);
+        const attackerIdPlayer = Number(randomAttackData.indexPlayer);
+
+        const gameSession = getGameSession(gameId);
+        if (gameSession) {
+          const attacker = getPlayerByIdPlayer(gameId, attackerIdPlayer);
+          if (attacker && attacker.index === gameSession.currentPlayerIndex) {
+            const result = randomAttack(randomAttackData);
+            await handleAttackResult(result, gameId, wss);
+          }
+        }
+      }
+      break;
+
+    case 'single_play':
+      if (ws.userIndex !== undefined) {
+        handleSinglePlay(ws.userIndex, ws);
       }
       break;
 

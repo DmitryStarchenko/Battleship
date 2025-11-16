@@ -3,6 +3,7 @@ import { readDB } from '../utils/readDB';
 import { writeDB } from '../utils/writeDB';
 import { DB_FILES } from '../constants/database';
 import { DBOnlineUsers, DBWinner } from '../types/DB';
+import { RESPONSE_CONFIG } from '../constants/response';
 
 export const updateWinners = async (winnerIndex: number): Promise<IResponse> => {
   const users = (await readDB(DB_FILES.ONLINE_USERS)) as DBOnlineUsers[];
@@ -12,7 +13,7 @@ export const updateWinners = async (winnerIndex: number): Promise<IResponse> => 
     return {
       type: 'update_winners',
       data: JSON.stringify([]),
-      id: 0,
+      id: RESPONSE_CONFIG.DEFAULT_ID,
     };
   }
 
@@ -38,6 +39,6 @@ export const updateWinners = async (winnerIndex: number): Promise<IResponse> => 
   return {
     type: 'update_winners',
     data: JSON.stringify(winners),
-    id: 0,
+    id: RESPONSE_CONFIG.DEFAULT_ID,
   };
 };

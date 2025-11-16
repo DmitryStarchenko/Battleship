@@ -4,7 +4,9 @@ import { sendToUser } from '../utils/sendToUser';
 import { broadcast } from '../utils/broadcast';
 import { updateWinners } from '../components/update_winners';
 import { createFinishResponse, createTurnResponse } from '../utils/responseFactory';
+import { processBotTurns } from './botTurnHandler';
 import { WebSocketServer } from 'ws';
+import { BOT_CONFIG } from '../constants/bot';
 
 export const handleAttackResult = async (
   result: { responses: IResponse[]; isGameOver: boolean; winnerId?: number } | null,
@@ -18,7 +20,9 @@ export const handleAttackResult = async (
 
   result.responses.forEach(attackResponse => {
     gameSession.players.forEach(player => {
-      sendToUser(player.index, attackResponse, wss);
+      if (player.index !== BOT_CONFIG.INDEX) {
+        sendToUser(player.index, attackResponse, wss);
+      }
     });
   });
 
@@ -28,14 +32,23 @@ export const handleAttackResult = async (
     if (winner) {
       const finishResponse = createFinishResponse(result.winnerId);
       gameSession.players.forEach(player => {
-        sendToUser(player.index, finishResponse, wss);
+        if (player.index !== BOT_CONFIG.INDEX) {
+          sendToUser(player.index, finishResponse, wss);
+        }
       });
 
-      const winnersResponse = await updateWinners(winner.index);
-      broadcast(winnersResponse, wss);
+      if (winner.index !== BOT_CONFIG.INDEX) {
+        const winnersResponse = await updateWinners(winner.index);
+        broadcast(winnersResponse, wss);
+      }
     }
   } else {
     sendTurnToPlayers(gameSession, wss);
+
+    const isGameWithBot = gameSession.players.some(player => player.index === BOT_CONFIG.INDEX);
+    if (isGameWithBot && gameSession.currentPlayerIndex === BOT_CONFIG.INDEX) {
+      await processBotTurns(gameId, wss);
+    }
   }
 };
 
@@ -50,7 +63,9 @@ const sendTurnToPlayers = (
   if (currentPlayer) {
     const turnResponse = createTurnResponse(currentPlayer.idPlayer);
     gameSession.players.forEach(player => {
-      sendToUser(player.index, turnResponse, wss);
+      if (player.index !== BOT_CONFIG.INDEX) {
+        sendToUser(player.index, turnResponse, wss);
+      }
     });
   }
 };

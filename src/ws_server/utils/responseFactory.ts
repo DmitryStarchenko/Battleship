@@ -1,10 +1,11 @@
 import { IResponse } from '../types/typesRes';
 import { IShips } from '../types/typesReq';
+import { RESPONSE_CONFIG } from '../constants/response';
 
 export const createResponse = <T>(type: string, data: T): IResponse => ({
   type,
   data: JSON.stringify(data),
-  id: 0,
+  id: RESPONSE_CONFIG.DEFAULT_ID,
 });
 
 export const createAttackResponse = (
