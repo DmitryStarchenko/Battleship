@@ -15,3 +15,8 @@ interface RoomUsers {
   name: string;
   index: number;
 }
+
+export interface DBWinner {
+  name: string;
+  wins: number;
+}

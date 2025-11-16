@@ -4,4 +4,3 @@
   "ignore": ["src/DataBase/**/*.json"],
   "exec": "tsx src/index.ts"
 }
-

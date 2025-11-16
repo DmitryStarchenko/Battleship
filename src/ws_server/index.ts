@@ -11,7 +11,6 @@ wss.on('connection', function connection(ws: WebSocket) {
   console.log(`New WebSocket connection established`);
 
   ws.on('message', async message => {
-    console.log(JSON.parse(message.toString()));
     const req = JSON.parse(message.toString());
 
     if (req.type === 'reg') {
