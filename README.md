@@ -7,6 +7,7 @@
 
 1. Clone/download repo
 2. `npm install`
+3. Create a `DataBase` folder in the `src` folder.
 
 ## Usage
 
