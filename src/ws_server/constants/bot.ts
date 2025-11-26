@@ -1,0 +1,5 @@
+export const BOT_CONFIG = {
+  INDEX: -1,
+  TURN_DELAY_MS: 1500,
+  SHIP_PLACEMENT_MAX_ATTEMPTS: 100,
+};
